@@ -225,4 +225,3 @@ function renderComments(bookIndex) {
     }
 
 }
-// document.addEventListener('DOMContentLoaded', renderBooks);
