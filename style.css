@@ -10,6 +10,10 @@ html h1 {
     text-align: center;
 }
 
+html h4 {
+    font-size: 24px;
+    color: blanchedalmond;
+}
 #content {
     display: flex;
     flex-direction: column;
@@ -25,7 +29,14 @@ html h1 {
     filter: drop-shadow(2px 4px 6px black);
 }
 
-.books img {
+.books p {
+    font-size: 24px;
+    background-color: rgba(95, 95, 95, 0.9);
+    border-radius: 8px;
+    padding: 8px 16px;
+}
+
+.book_img {
     height: 128px;
     width: 196px;
     border-radius: 8px;
@@ -33,4 +44,16 @@ html h1 {
 
 #content h3 {
     color: blanchedalmond;
+}
+
+
+#likes {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#likes img {
+    height: 24px;
+    width: 24px;
 }

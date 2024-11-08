@@ -174,9 +174,8 @@ let books = [
 }
 ]
 
-// render books Objects
 
-;
+// render books Objects(containers)
 function renderBooks() {
     let booksRef = document.getElementById('content');
     booksRef.innerHTML = "";
@@ -186,12 +185,44 @@ function renderBooks() {
         let itemHtml = `
         <div class="books">
             <h3><b>${item.name}</b></h3>
-            <img src="./assets/img/default_book_640.png">
+            <img class="book_img" src="./assets/img/default_book_640.png">
+            <p><b>Price:</b>${item.price}</p>
             <p><b>Author:</b>${item.author}</p>
             <p><b>Public release:</b>${item.publishedYear}</p>
-            <p><b>Category:</b>${item.category}</p>
+            <p><b>Genre:</b>${item.genre}</p>
+            <div id="likes">
+                <p><img src="./assets/img/heart_32x28.png"> <b>${item.likes}</b></p>  
+            </div>
+            <div id="comments_${index}"></div>
         </div>
+        
        `;
         booksRef.innerHTML += itemHtml;
+        renderComments(index);
     }
 }
+
+
+// render comments function
+function renderComments(bookIndex) {
+    let book = books[bookIndex];
+    let commentsDiv = document.getElementById('comments_' + bookIndex);
+
+    commentsDiv.innerHTML = "";
+
+    commentsDiv.innerHTML += "<h4>Comments:</h4>";
+
+    if(book.comments.length > 0) {
+        for (let index = 0; index < book.comments.length; index++) {
+            let comment = book.comments[index];
+            commentsDiv.innerHTML += `
+                <p><b>${comment.name}:</b><br> ${comment.comment}
+                </p> 
+                `;
+        }
+    }   else {
+        commentsDiv.innerHTML += "<p>No coments yet.</p>";
+    }
+
+}
+// document.addEventListener('DOMContentLoaded', renderBooks);
