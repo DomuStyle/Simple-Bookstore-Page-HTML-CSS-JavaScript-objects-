@@ -194,8 +194,6 @@ function renderBooks() {
                 <p><img src="./assets/img/heart_32x28.png"> <b>${item.likes}</b></p>  
             </div>
             <div id="comments${index}">
-                <input id="commentInput${index}" type="text" placeholder="Add new comment here...">
-                <button onClick="addComment(${index})"><b>Addcomment</b></button>
             </div>
         </div>
         
@@ -206,12 +204,6 @@ function renderBooks() {
 }
 
 
-// function to add new Comment from input element
-
-
-// add new comments function
-
-
 // render comments function
 function renderComments(bookIndex) {
     let book = books[bookIndex];
@@ -220,8 +212,8 @@ function renderComments(bookIndex) {
     commentsDiv.innerHTML = "";
 
     commentsDiv.innerHTML += `<h4>Comments:</h4>
-                <input id="commentInput${bookIndex}" type="text" placeholder="Add new comment here...">
-                <button onClick="addComment(${bookIndex})"><b>Addcomment</b></button>
+                <input id="commentInput${bookIndex}" type="text" placeholder="type new comment here...">
+                <button onClick="addComment(${bookIndex})"><b>Add comment</b></button>
                 `;
 
     if(book.comments.length > 0) {
@@ -237,4 +229,24 @@ function renderComments(bookIndex) {
         commentsDiv.innerHTML += "<p>No coments yet.</p>"; // if the books doesnt have any comments this will show up
     }
 
+}
+
+
+// add new comments to a book function
+function addComment(bookIndex) {  //craetes the function "addComment"
+    let commentInput = document.getElementById(`commentInput${bookIndex}`); // creates the var " commentInput" and assigns it to the input element with id "commentInput"
+    let commentText = commentInput.value; // creates the var "commentText" and saves the new typed content(value)
+
+    if (commentText.trim() !== "") {        // if request to check if there where only empty spaces typed in th inputfiled
+        let newComment = {        // create a newComment object and stores the value from "commentText"    
+            name: "anonymous",  // random fixed name as placeholder
+            comment: commentText  // access the "commentText" value for "newComment" var
+        };
+        books[bookIndex].comments.push(newComment); // pushes the newComment into the existing "books" object
+        commentInput.value = "";  // clears the input field after adding a comment
+        renderComments(bookIndex);  // calls the function "renderComents"
+    }
+    else {
+        alert("Please enter a comment before submitting");
+    }
 }
