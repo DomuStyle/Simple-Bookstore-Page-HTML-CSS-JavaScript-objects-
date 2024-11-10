@@ -193,7 +193,10 @@ function renderBooks() {
             <div id="likes">
                 <p><img src="./assets/img/heart_32x28.png"> <b>${item.likes}</b></p>  
             </div>
-            <div id="comments_${index}"></div>
+            <div id="comments${index}">
+                <input id="commentInput${index}" type="text" placeholder="Add new comment here...">
+                <button onClick="addComment(${index})"><b>Addcomment</b></button>
+            </div>
         </div>
         
        `;
@@ -203,14 +206,23 @@ function renderBooks() {
 }
 
 
+// function to add new Comment from input element
+
+
+// add new comments function
+
+
 // render comments function
 function renderComments(bookIndex) {
     let book = books[bookIndex];
-    let commentsDiv = document.getElementById('comments_' + bookIndex);
+    let commentsDiv = document.getElementById('comments' + bookIndex);
 
     commentsDiv.innerHTML = "";
 
-    commentsDiv.innerHTML += "<h4>Comments:</h4>";
+    commentsDiv.innerHTML += `<h4>Comments:</h4>
+                <input id="commentInput${bookIndex}" type="text" placeholder="Add new comment here...">
+                <button onClick="addComment(${bookIndex})"><b>Addcomment</b></button>
+                `;
 
     if(book.comments.length > 0) {
         for (let index = 0; index < book.comments.length; index++) {
@@ -220,8 +232,9 @@ function renderComments(bookIndex) {
                 </p> 
                 `;
         }
-    }   else {
-        commentsDiv.innerHTML += "<p>No coments yet.</p>";
+    }   
+    else {
+        commentsDiv.innerHTML += "<p>No coments yet.</p>"; // if the books doesnt have any comments this will show up
     }
 
 }
