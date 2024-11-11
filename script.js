@@ -174,6 +174,7 @@ let books = [
 }
 ]
 
+loadFromLocalStorage();
 
 // render books Objects(containers)
 function renderBooks() {
@@ -247,6 +248,33 @@ function addComment(bookIndex) {  //craetes the function "addComment"
         renderComments(bookIndex);  // calls the function "renderComents"
     }
     else {
-        alert("Please enter a comment before submitting");
+        alert("Please enter a comment before submitting"); // creates a notification Message thst displays the definded Warning-Message
     }
+    saveToLocalStorage(); // calls the function "saveToLocalStorage" after each comment is added
 }
+
+
+// save comments to localStorage
+function saveToLocalStorage() {
+    let commentString = JSON.stringify(books); // creates the var " commentString" and stringifys the content inside
+    localStorage.setItem('bookComments', commentString); // saves the JSON String to Local Storage using the Key: bookcomments
+    console.log('comments saved in LS'); // log order for debugging
+}
+
+
+// load comments from local storage
+function loadFromLocalStorage() {
+    let commentsJson = localStorage.getItem('bookComments'); // access the bookComments inside the LocalStorage
+
+    if (commentsJson !== null) {    // checks if there is any data inside the LocalStorage inside "bookComments"
+        books = JSON.parse(commentsJson);  // parses the stringifyied comments back to an array to be readable by the browser
+        console.log('comments where loaded from Local Storage'); // log order for debugging        
+    } 
+}
+
+
+
+
+// onClick function for like button
+
+// function to count up and down likes
