@@ -192,7 +192,7 @@ function renderBooks() {
             <p><b>Public release:</b>${item.publishedYear}</p>
             <p><b>Genre:</b>${item.genre}</p>
             <div id="likes">
-                <p><img src="./assets/img/heart_32x28.png"> <b>${item.likes}</b></p>  
+                <p id="likeButton${index}"><img onClick="addLike(${index})" src="./assets/img/heart-empty_32x32.png"> <b>${item.likes}</b></p>  
             </div>
             <div id="comments${index}">
             </div>
@@ -273,8 +273,34 @@ function loadFromLocalStorage() {
 }
 
 
-
-
 // onClick function for like button
+function addLike(bookIndex) {
+    let book = books[bookIndex];
+    let likeButton = document.getElementById('likeButton' + bookIndex);
+    let heartImage = likeButton.firstChild;
+    let likesCount = likeButton.lastChild;
+
+    if (book.liked) {
+        heartImage.src = "./assets/img/heart_32x28.png";
+        book.likes = book.likes +1;
+    }
+    else {
+        heartImage.src = "./assets/img/heart-empty_32x32.png";
+        book.likes = book.likes -1;
+    }
+
+    if (book.liked)  {
+        book.liked = false;
+    }
+    else {
+        book.liked = true;
+    }
+
+    likesCount.innerHTML = book.likes
+
+    saveToLocalStorage();
+}
+
+
 
 // function to count up and down likes
