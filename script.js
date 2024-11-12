@@ -174,7 +174,9 @@ let books = [
 }
 ]
 
+
 loadFromLocalStorage();
+
 
 // render books Objects(containers)
 function renderBooks() {
@@ -183,7 +185,6 @@ function renderBooks() {
 
     for (let index = 0; index < books.length; index++ ) {
         let itemHtml = getBookTemplate(index); // created function "getBookTemplate(index)" in templates.js and call it in this line
-
         booksRef.innerHTML += itemHtml;
         renderComments(index);
     }
@@ -194,9 +195,7 @@ function renderBooks() {
 function renderComments(bookIndex) {
     let book = books[bookIndex];
     let commentsDiv = document.getElementById('comments' + bookIndex);
-
     commentsDiv.innerHTML = "";
-
     commentsDiv.innerHTML += getCommentTemplate(bookIndex);
 
     if(book.comments.length > 0) {
@@ -240,7 +239,7 @@ function addComment(bookIndex) {  //craetes the function "addComment"
 function saveToLocalStorage() {
     let commentString = JSON.stringify(books); // creates the var " commentString" and stringifys the content inside
     localStorage.setItem('bookComments', commentString); // saves the JSON String to Local Storage using the Key: bookcomments
-    console.log('comments saved in LS'); // log order for debugging
+    // console.log('comments saved in LS'); // log order for debugging comment in to enable
 }
 
 
@@ -250,7 +249,7 @@ function loadFromLocalStorage() {
 
     if (commentsJson !== null) {    // checks if there is any data inside the LocalStorage inside "bookComments"
         books = JSON.parse(commentsJson);  // parses the stringifyied comments back to an array to be readable by the browser
-        console.log('comments where loaded from Local Storage'); // log order for debugging        
+        // console.log('comments where loaded from Local Storage'); // log order for debugging comment in to enable       
     } 
 }
 
@@ -279,7 +278,6 @@ function addLike(bookIndex) {
     }
 
     likesCount.innerHTML = book.likes
-
     saveToLocalStorage();
 }
 
